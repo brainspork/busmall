@@ -118,7 +118,8 @@ function createList(){
   var listArr = [];
   console.log(listArr);
   for(var i = 0; i < proArr.length; i++){
-    listArr.push('<li>' + proArr[i].name + ': ' + proArr[i].clicked + '</li>');
+    var ratio = (proArr[i].clicked / proArr[i].shown)* 100;
+    listArr.push('<li>' + proArr[i].name + '- Shown: '+ proArr[i].shown +'   Clicked: '+ proArr[i].clicked + '  Ratio: ' + ratio + '%</li>');
   }
 
   list.innerHTML = listArr.join('');
