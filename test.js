@@ -1,5 +1,3 @@
-'use strict';
-
 function Product(name, path){
   this.name = name;
   this.path = path;
@@ -32,76 +30,31 @@ var wineGlass = new Product('Hollower-Than-Me Wine Glass', 'wine-glass.jpg');
 
 var proArr = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
-function flagReset(){
-  for(var k = 0; k < proArr.length; k++){
-    if(proArr[k].flag === true && proArr[k].flagCounter === 3){
-      proArr[k].flag = false;
-      proArr[k].flagCounter = 0;
-    }else if(proArr[k].flag === true && proArr[k].flagCounter < 3){
-      proArr[k].flagCounter++;
-    }
+var arrOne = [];
+
+function choices(){
+  var displayArr = [];
+
+  for(var i = 0; i < 3; i++){
+    var choice = Math.floor(Math.random() * proArr.length);
+    displayArr.push(proArr[choice]);
+    proArr[choice].shown++;
   }
+  displayArr.push(arrOne);
+  display();
 }
 
-function displayChoice(){
-  console.log('counter', bag.flagCounter);
-  console.log('boolean', bag.flag);
-  flagReset();
-  var displayArr = [];
-  console.log(displayArr);
-  for(var i = 0; i < 3; i++){
-    console.log('i',i);
-    var choice = Math.floor(Math.random()*proArr.length);
-    console.log('choice', choice);
-    if(proArr[choice].flag === false){
-      displayArr.push(proArr[choice]);
-      proArr[choice].shown++;
-      proArr[choice].flag = true;
-    }else{
-      i--;
-    }
-  }
-
-  for(var j = 0; j < displayArr.length; j++){
+function display(){
+  for(var j = 0; j < arrOne.length; j++){
     var el = document.getElementById('product-' + [j]);
     console.log('product-' + [j]);
     var image = document.createElement('img');
     var displayName = document.createElement('h2');
-    image.src = './img/' + displayArr[j].path;
-    displayName.innerHTML = displayArr[j].name;
+    image.src = './img/' + arrOne[j].path;
+    displayName.innerHTML = arrOne[j].name;
     el.appendChild(image);
     el.appendChild(displayName);
   }
-  makeChoice();
 }
 
-function makeChoice(){
-  var itemOne = document.getElementById('product-0');
-  var itemTwo = document.getElementById('product-1');
-  var itemThree = document.getElementById('product-2');
-  console.log(itemOne);
-  console.log(itemThree);
-
-  function clear(){
-    itemOne.innerHTML = '';
-    itemTwo.innerHTML = '';
-    itemThree.innerHTML = '';
-  }
-
-  itemOne.addEventListener('click', function(){
-    clear();
-    displayChoice();
-  });
-
-  itemTwo.addEventListener('click', function(){
-    clear();
-    displayChoice();
-  });
-
-  itemThree.addEventListener('click', function(){
-    clear();
-    displayChoice();
-  });
-}
-
-displayChoice();
+choices();
