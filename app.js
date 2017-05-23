@@ -101,6 +101,7 @@ function makeChoice(){
   itemThree.addEventListener('click', function(){
     clear();
     displayChoice();
+
   });
 }
 
