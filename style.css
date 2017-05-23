@@ -1,12 +1,23 @@
-.clear{
-  clear:both;
+header{
+  background-color:#669999;
+  border-bottom:5px solid black;
+  height: 150px;
 }
 
-header{
-  display:inline-block;
+hgroup{
   width:960px;
   margin:0 auto;
-  border-bottom: 10px black;
+  padding:20px;
+}
+
+header hgroup h1{
+  font:60px helvetica;
+  text-align:center;
+}
+
+header hgroup p{
+  font:30px helvetica;
+  text-align:center;
 }
 
 main{
@@ -18,6 +29,7 @@ div{
   float:left;
   height:400px;
   width:300px;
+  margin:30px 10px;
 }
 
 img{
@@ -30,5 +42,15 @@ h2{
   width:300px;
   font: 25px helvetica;
   text-align:center;
+}
 
+ul{
+  position:absolute;
+  width:960px;
+  text-align:center;
+}
+
+li{
+  font: 20px helvetica;
+  padding:10px 0;
 }
