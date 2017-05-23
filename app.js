@@ -74,7 +74,6 @@ function displayChoice(){
   }
 }
 
-
 var itemOne = document.getElementById('product-0');
 var itemTwo = document.getElementById('product-1');
 var itemThree = document.getElementById('product-2');
