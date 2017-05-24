@@ -163,7 +163,7 @@ function createChart(){
     tableName.push(proArr[i].name);
   }
 
-  var chart = new Chart(ctx, {
+  new Chart(ctx, {
     type: 'bar',
     data: {
       labels: tableName,
