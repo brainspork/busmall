@@ -26,7 +26,7 @@ var shark = new Product('Eat Me Asleep Sleeping Bag', 'shark.jpg');
 var sweep = new Product('Pull-Your-Weight Onesie', 'sweep.png');
 var tauntaun = new Product('Smells Bad on the Inside', 'tauntaun.jpg');
 var unicorn = new Product('Canned Child Dreams', 'unicorn.jpg');
-var usb = new Product('Solution to Censorship', 'usb.gif');
+var usb = new Product('Solution to Censorship USB', 'usb.gif');
 var waterCan = new Product('The Human Condition Watering Can', 'water-can.jpg');
 var wineGlass = new Product('Hollower-Than-Me Wine Glass', 'wine-glass.jpg');
 
@@ -84,21 +84,21 @@ function clear(){
   itemThree.innerHTML = '';
 }
 
-itemOne.addEventListener('click', function(){
+itemOne.addEventListener('click', function (){
   displayArr[0].clicked++;
   totalClicked++;
   clear();
   clickCheck();
 });
 
-itemTwo.addEventListener('click', function(){
+itemTwo.addEventListener('click', function (){
   displayArr[1].clicked++;
   totalClicked++;
   clear();
   clickCheck();
 });
 
-itemThree.addEventListener('click', function(){
+itemThree.addEventListener('click', function (){
   displayArr[2].clicked++;
   totalClicked++;
   clear();
@@ -107,10 +107,15 @@ itemThree.addEventListener('click', function(){
 
 function clickCheck(){
   if(totalClicked >= 25){
+    classChange();
     createList();
   }else{
     return displayChoice();
   }
+}
+
+function classChange(){
+
 }
 
 function createList(){
@@ -124,6 +129,30 @@ function createList(){
 
   list.innerHTML = listArr.join('');
   console.log(listArr.join(''));
+  createChart();
+}
+
+function createChart(){
+  var canvas = document.getElementById('chart');
+  var ctx = canvas.getContext('2d');
+  var tableName = [];
+  var tableData = [];
+  for(var i = 0; i < proArr.length; i++){
+    tableData.push(proArr[i].clicked);
+    tableName.push(proArr[i].name);
+  }
+
+  var chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: tableName,
+      datasets: [{
+        label: 'Votes for Products',
+        data: tableData
+      }]
+    },
+    options: {}
+  });
 }
 
 displayChoice();
