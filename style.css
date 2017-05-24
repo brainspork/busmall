@@ -1,3 +1,7 @@
+.end{
+  display:none;
+}
+
 header{
   background-color:#669999;
   border-bottom:5px solid black;
@@ -11,12 +15,12 @@ hgroup{
 }
 
 header hgroup h1{
-  font:60px helvetica;
+  font:60px 'Fjalla One', helvetica;
   text-align:center;
 }
 
 header hgroup p{
-  font:30px helvetica;
+  font:30px 'Fjalla One', helvetica;
   text-align:center;
 }
 
@@ -40,17 +44,17 @@ img{
 h2{
   display:inline-block;
   width:300px;
-  font: 25px helvetica;
+  font: 25px 'Josefin Sans', helvetica;
   text-align:center;
 }
 
 ul{
-  position:absolute;
-  width:960px;
   text-align:center;
+
+  width:960px;
 }
 
 li{
-  font: 20px helvetica;
-  padding:10px 0;
+  font: 20px 'Josefin Sans', helvetica;
+  padding:5px 0;
 }
