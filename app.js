@@ -26,7 +26,7 @@ var shark = new Product('Eat Me Asleep Sleeping Bag', 'shark.jpg');
 var sweep = new Product('Pull-Your-Weight Onesie', 'sweep.png');
 var tauntaun = new Product('Smells Bad on the Inside', 'tauntaun.jpg');
 var unicorn = new Product('Canned Child Dreams', 'unicorn.jpg');
-var usb = new Product('Solution to Censorship', 'usb.gif');
+var usb = new Product('Solution to Censorship USB', 'usb.gif');
 var waterCan = new Product('The Human Condition Watering Can', 'water-can.jpg');
 var wineGlass = new Product('Hollower-Than-Me Wine Glass', 'wine-glass.jpg');
 
@@ -43,16 +43,17 @@ function flagReset(){
   }
 }
 
+var displayArr = [];
+var totalClicked = 0;
+
 function displayChoice(){
   console.log('counter', bag.flagCounter);
   console.log('boolean', bag.flag);
+  console.log(totalClicked);
   flagReset();
-  var displayArr = [];
-  console.log(displayArr);
+  displayArr = [];
   for(var i = 0; i < 3; i++){
-    console.log('i',i);
     var choice = Math.floor(Math.random()*proArr.length);
-    console.log('choice', choice);
     if(proArr[choice].flag === false){
       displayArr.push(proArr[choice]);
       proArr[choice].shown++;
@@ -64,7 +65,6 @@ function displayChoice(){
 
   for(var j = 0; j < displayArr.length; j++){
     var el = document.getElementById('product-' + [j]);
-    console.log('product-' + [j]);
     var image = document.createElement('img');
     var displayName = document.createElement('h2');
     image.src = './img/' + displayArr[j].path;
@@ -72,35 +72,95 @@ function displayChoice(){
     el.appendChild(image);
     el.appendChild(displayName);
   }
-  makeChoice();
 }
 
-function makeChoice(){
-  var itemOne = document.getElementById('product-0');
-  var itemTwo = document.getElementById('product-1');
-  var itemThree = document.getElementById('product-2');
-  console.log(itemOne);
-  console.log(itemThree);
+var itemOne = document.getElementById('product-0');
+var itemTwo = document.getElementById('product-1');
+var itemThree = document.getElementById('product-2');
 
-  function clear(){
-    itemOne.innerHTML = '';
-    itemTwo.innerHTML = '';
-    itemThree.innerHTML = '';
+function clear(){
+  itemOne.innerHTML = '';
+  itemTwo.innerHTML = '';
+  itemThree.innerHTML = '';
+}
+
+itemOne.addEventListener('click', function (){
+  displayArr[0].clicked++;
+  totalClicked++;
+  clear();
+  clickCheck();
+});
+
+itemTwo.addEventListener('click', function (){
+  displayArr[1].clicked++;
+  totalClicked++;
+  clear();
+  clickCheck();
+});
+
+itemThree.addEventListener('click', function (){
+  displayArr[2].clicked++;
+  totalClicked++;
+  clear();
+  clickCheck();
+});
+
+function clickCheck(){
+  if(totalClicked >= 25){
+    classChange();
+    createList();
+  }else{
+    return displayChoice();
+  }
+}
+
+function classChange(){
+  var visibleOne = document.getElementById('product-0');
+  var visibleTwo = document.getElementById('product-1');
+  var visibleThree = document.getElementById('product-2');
+  visibleOne.className = 'end';
+  visibleTwo.className = 'end';
+  visibleThree.className = 'end';
+}
+
+function createList(){
+  var list = document.getElementById('totals-list');
+  var listArr = [];
+  console.log(listArr);
+  for(var i = 0; i < proArr.length; i++){
+    var ratio = (proArr[i].clicked / proArr[i].shown)* 100;
+    listArr.push('<li>' + proArr[i].name + '- Shown: '+ proArr[i].shown +'   Clicked: '+ proArr[i].clicked + '  Ratio: ' + ratio + '%</li>');
   }
 
-  itemOne.addEventListener('click', function(){
-    clear();
-    displayChoice();
-  });
+  list.innerHTML = listArr.join('');
+  console.log(listArr.join(''));
+  createChart();
+}
 
-  itemTwo.addEventListener('click', function(){
-    clear();
-    displayChoice();
-  });
+function createChart(){
+  var canvas = document.getElementById('chart');
+  var ctx = canvas.getContext('2d');
+  var tableName = [];
+  var tableData = [];
+  for(var i = 0; i < proArr.length; i++){
+    tableData.push(proArr[i].clicked);
+    tableName.push(proArr[i].name);
+  }
 
-  itemThree.addEventListener('click', function(){
-    clear();
-    displayChoice();
+  var chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: tableName,
+      datasets: [{
+        label: 'Votes for Products',
+        data: tableData,
+        backgroundColor: ['#e5b8d9', '#3b2be1', '#f05671', '#15d4e4', '#e6c2a2', '#ca542b', '#b9146f', '#9b4449', '#af2ce2', '#0d97c8', '#2cc10f', '#98384d', '#f265e1', '#1325e7', '#dc30fc', '#9a32cb', '#f3266f', '#b56a89', '#68b662', '#670f5d']
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+    }
   });
 }
 

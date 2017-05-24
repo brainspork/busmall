@@ -1,3 +1,60 @@
-*{
-  outline:3px dotted black;
+.end{
+  display:none;
+}
+
+header{
+  background-color:#669999;
+  border-bottom:5px solid black;
+  height: 150px;
+}
+
+hgroup{
+  width:960px;
+  margin:0 auto;
+  padding:20px;
+}
+
+header hgroup h1{
+  font:60px 'Fjalla One', helvetica;
+  text-align:center;
+}
+
+header hgroup p{
+  font:30px 'Fjalla One', helvetica;
+  text-align:center;
+}
+
+main{
+  width:960px;
+  margin:0 auto;
+}
+
+div{
+  float:left;
+  height:400px;
+  width:300px;
+  margin:30px 10px;
+}
+
+img{
+  width:300px;
+  height:300px;
+}
+
+h2{
+  display:inline-block;
+  width:300px;
+  font: 25px 'Josefin Sans', helvetica;
+  text-align:center;
+}
+
+ul{
+  text-align:center;
+
+  width:960px;
+}
+
+li{
+  font: 20px 'Josefin Sans', helvetica;
+  padding:5px 0;
 }

@@ -2,14 +2,29 @@
 <html>
   <head>
     <title>Welcome to Busmall</title>
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Josefin+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <header>
+      <hgroup>
+        <h1>Welcome to Busmall</h1>
+        <p>Which Product Interests You?</p>
+      </hgroup>
+    </header>
     <main>
       <div id="product-0"></div>
       <div id="product-1"></div>
       <div id="product-2"></div>
+      <ul id="totals-list"></ul>
     </main>
+
+      <section>
+        <canvas id="chart" width="500" height="500"></canvas>
+      </section>
+
+    <script src="chart.min.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
