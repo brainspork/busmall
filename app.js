@@ -1,5 +1,9 @@
 'use strict';
 
+var itemOne = document.getElementById('product-0');
+var itemTwo = document.getElementById('product-1');
+var itemThree = document.getElementById('product-2');
+
 function Product(name, path){
   this.name = name;
   this.path = path;
@@ -30,25 +34,36 @@ var usb = new Product('Solution to Censorship USB', 'usb.gif');
 var waterCan = new Product('The Human Condition Watering Can', 'water-can.jpg');
 var wineGlass = new Product('Hollower-Than-Me Wine Glass', 'wine-glass.jpg');
 
-var proArr = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
+if(localStorage.currentClick){
+  displayArr = JSON.parse(localStorage.currentArr);
+
+  proArr = JSON.parse(localStorage.currentProducts);
+  console.log(proArr);
+  totalClicked = localStorage.currentClick;
+  if(totalClicked >= 25){
+    classChange();
+    createList();
+  }
+  render();
+}else{
+  var proArr = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
+  var displayArr = [];
+  var totalClicked = 0;
+  displayChoice();
+}
 
 function flagReset(){
   for(var k = 0; k < proArr.length; k++){
-    if(proArr[k].flag === true && proArr[k].flagCounter === 3){
+    if(proArr[k].flag === true && proArr[k].flagCounter === 2){
       proArr[k].flag = false;
       proArr[k].flagCounter = 0;
-    }else if(proArr[k].flag === true && proArr[k].flagCounter < 3){
+    }else if(proArr[k].flag === true && proArr[k].flagCounter < 2){
       proArr[k].flagCounter++;
     }
   }
 }
 
-var displayArr = [];
-var totalClicked = 0;
-
 function displayChoice(){
-  console.log('counter', bag.flagCounter);
-  console.log('boolean', bag.flag);
   console.log(totalClicked);
   flagReset();
   displayArr = [];
@@ -62,7 +77,12 @@ function displayChoice(){
       i--;
     }
   }
+  localStorage.currentArr = JSON.stringify(displayArr);
+  console.log('Curar', bag.flag);
+  render();
+}
 
+function render(){
   for(var j = 0; j < displayArr.length; j++){
     var el = document.getElementById('product-' + [j]);
     var image = document.createElement('img');
@@ -74,10 +94,6 @@ function displayChoice(){
   }
 }
 
-var itemOne = document.getElementById('product-0');
-var itemTwo = document.getElementById('product-1');
-var itemThree = document.getElementById('product-2');
-
 function clear(){
   itemOne.innerHTML = '';
   itemTwo.innerHTML = '';
@@ -86,21 +102,21 @@ function clear(){
 
 itemOne.addEventListener('click', function (){
   displayArr[0].clicked++;
-  totalClicked++;
+  localStorage.currentClick = totalClicked;
   clear();
   clickCheck();
 });
 
 itemTwo.addEventListener('click', function (){
   displayArr[1].clicked++;
-  totalClicked++;
+  localStorage.currentClick = totalClicked;
   clear();
   clickCheck();
 });
 
 itemThree.addEventListener('click', function (){
   displayArr[2].clicked++;
-  totalClicked++;
+  localStorage.currentClick = totalClicked;
   clear();
   clickCheck();
 });
@@ -110,6 +126,9 @@ function clickCheck(){
     classChange();
     createList();
   }else{
+    totalClicked++;
+    console.log(proArr);
+    localStorage.currentProducts = JSON.stringify(proArr);
     return displayChoice();
   }
 }
@@ -145,7 +164,7 @@ function createChart(){
   }
 
   var chart = new Chart(ctx, {
-    type: 'doughnut',
+    type: 'bar',
     data: {
       labels: tableName,
       datasets: [{
@@ -160,5 +179,3 @@ function createChart(){
     }
   });
 }
-
-displayChoice();
