@@ -115,7 +115,12 @@ function clickCheck(){
 }
 
 function classChange(){
-
+  var visibleOne = document.getElementById('product-0');
+  var visibleTwo = document.getElementById('product-1');
+  var visibleThree = document.getElementById('product-2');
+  visibleOne.className = 'end';
+  visibleTwo.className = 'end';
+  visibleThree.className = 'end';
 }
 
 function createList(){
@@ -148,10 +153,14 @@ function createChart(){
       labels: tableName,
       datasets: [{
         label: 'Votes for Products',
-        data: tableData
+        data: tableData,
+        backgroundColor: ['#e5b8d9', '#3b2be1', '#f05671', '#15d4e4', '#e6c2a2', '#ca542b', '#b9146f', '#9b4449', '#af2ce2', '#0d97c8', '#2cc10f', '#98384d', '#f265e1', '#1325e7', '#dc30fc', '#9a32cb', '#f3266f', '#b56a89', '#68b662', '#670f5d']
       }]
     },
-    options: {}
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+    }
   });
 }
 
