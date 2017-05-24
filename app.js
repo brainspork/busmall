@@ -115,12 +115,9 @@ function clickCheck(){
 }
 
 function classChange(){
-  var visibleOne = document.getElementById('product-0');
-  var visibleTwo = document.getElementById('product-1');
-  var visibleThree = document.getElementById('product-2');
-  visibleOne.className = 'end';
-  visibleTwo.className = 'end';
-  visibleThree.className = 'end';
+  itemOne.className = 'end';
+  itemTwo.className = 'end';
+  itemThree.className = 'end';
 }
 
 function createList(){
@@ -129,7 +126,7 @@ function createList(){
   console.log(listArr);
   for(var i = 0; i < proArr.length; i++){
     var ratio = (proArr[i].clicked / proArr[i].shown)* 100;
-    listArr.push('<li>' + proArr[i].name + '- Shown: '+ proArr[i].shown +'   Clicked: '+ proArr[i].clicked + '  Ratio: ' + ratio + '%</li>');
+    listArr.push('<li>' + proArr[i].name + '- Shown: '+ proArr[i].shown +'   Clicked: '+ proArr[i].clicked + '  Ratio: ' + parseFloat(ratio).toFixed(2) + '%</li>');
   }
 
   list.innerHTML = listArr.join('');
