@@ -40,10 +40,7 @@ if(localStorage.currentClick){
   proArr = JSON.parse(localStorage.currentProducts);
   console.log(proArr);
   totalClicked = localStorage.currentClick;
-  if(totalClicked >= 24){
-    classChange();
-    createList();
-  }
+  clickCheck();
   render();
 }else{
   var proArr = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
@@ -121,13 +118,19 @@ itemThree.addEventListener('click', function (){
 
 function clickCheck(){
   if(totalClicked >= 24){
+    localStorage.currentProducts = JSON.stringify(proArr);
     classChange();
     createList();
+    clearLocalDisplay();
   }else{
     totalClicked++;
     localStorage.currentProducts = JSON.stringify(proArr);
     return displayChoice();
   }
+}
+
+function clearLocalDisplay(){
+  return localStorage.removeItem(localStorage.currentArr);
 }
 
 function classChange(){
