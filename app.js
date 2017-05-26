@@ -40,7 +40,7 @@ if(localStorage.currentClick){
   proArr = JSON.parse(localStorage.currentProducts);
   console.log(proArr);
   totalClicked = localStorage.currentClick;
-  if(totalClicked >= 25){
+  if(totalClicked >= 24){
     classChange();
     createList();
   }
@@ -64,7 +64,6 @@ function flagReset(){
 }
 
 function displayChoice(){
-  console.log(totalClicked);
   flagReset();
   displayArr = [];
   for(var i = 0; i < 3; i++){
@@ -78,7 +77,6 @@ function displayChoice(){
     }
   }
   localStorage.currentArr = JSON.stringify(displayArr);
-  console.log('Curar', bag.flag);
   render();
 }
 
@@ -122,12 +120,11 @@ itemThree.addEventListener('click', function (){
 });
 
 function clickCheck(){
-  if(totalClicked >= 25){
+  if(totalClicked >= 24){
     classChange();
     createList();
   }else{
     totalClicked++;
-    console.log(proArr);
     localStorage.currentProducts = JSON.stringify(proArr);
     return displayChoice();
   }
@@ -142,14 +139,12 @@ function classChange(){
 function createList(){
   var list = document.getElementById('totals-list');
   var listArr = [];
-  console.log(listArr);
   for(var i = 0; i < proArr.length; i++){
     var ratio = (proArr[i].clicked / proArr[i].shown)* 100;
     listArr.push('<li>' + proArr[i].name + '- Shown: '+ proArr[i].shown +'   Clicked: '+ proArr[i].clicked + '  Ratio: ' + parseFloat(ratio).toFixed(2) + '%</li>');
   }
 
   list.innerHTML = listArr.join('');
-  console.log(listArr.join(''));
   createChart();
 }
 
@@ -175,7 +170,15 @@ function createChart(){
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: false,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true,
+            max:10,
+          }
+        }]
+      }
     }
   });
 }
