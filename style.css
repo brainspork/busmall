@@ -2,6 +2,10 @@
   display:none;
 }
 
+body{
+  background-color:#7F7F7F;
+}
+
 header{
   background-color:#669999;
   border-bottom:5px solid black;
@@ -31,9 +35,12 @@ main{
 
 div{
   float:left;
-  height:400px;
+  background-color:#669999;;
+  border:2px solid #D6FFFF;
+  border-radius: 3px;
+  height:375px;
   width:300px;
-  margin:30px 10px;
+  margin:30px 7px;
 }
 
 img{
@@ -42,7 +49,6 @@ img{
 }
 
 h2{
-  display:inline-block;
   width:300px;
   font: 25px 'Josefin Sans', helvetica;
   text-align:center;
@@ -56,4 +62,10 @@ ul{
 li{
   font: 20px 'Josefin Sans', helvetica;
   padding:5px 0;
+}
+
+section{
+  background-color:#FFFBE6;
+  margin-top:20px;
+  border-top:2px solid black;
 }
