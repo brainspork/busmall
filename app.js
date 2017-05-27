@@ -40,7 +40,11 @@ if(localStorage.currentClick){
   proArr = JSON.parse(localStorage.currentProducts);
   console.log(proArr);
   totalClicked = localStorage.currentClick;
-  clickCheck();
+  if(totalClicked >= 24){
+    classChange();
+    createList();
+    clearLocalDisplay();
+  }
   render();
 }else{
   var proArr = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
